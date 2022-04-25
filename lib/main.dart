@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
         create: (context) => GoogleSignInProvider(),
-        child: const MaterialApp(title: "todo", home: wrapper()));
+        child: MaterialApp(debugShowCheckedModeBanner: false,
+        theme:ThemeData.dark(),title: "todo", home: wrapper()));
   }
 }

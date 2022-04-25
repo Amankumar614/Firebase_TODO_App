@@ -1,29 +1,32 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:todo/Services.dart/initTitile.dart';
 import 'package:todo/Services.dart/services.dart';
 
-class ShowDialog extends StatefulWidget {
-  // const ShowDialog({ Key? key }) : super(key: key);
+class editDialog extends StatefulWidget {
+  // const editDialog({ Key? key }) : super(key: key);
+  final String initTitle;
+  final String initDescription;
+  editDialog({required this.initTitle, required this.initDescription});
 
   @override
-  State<ShowDialog> createState() => _ShowDialogState();
+  State<editDialog> createState() => _editDialogState();
 }
+
 
 final _formKey = GlobalKey<FormState>();
 
-class _ShowDialogState extends State<ShowDialog> {
-  String title = '';
-  String Description = '';
+class _editDialogState extends State<editDialog> {
   @override
   Widget build(BuildContext context) {
-    print("showdialog title $Title");
-    print("showdialog description $Description");
+String changeTitle = widget.initTitle;
+String changeDescr = widget.initDescription;
+
     return Form(
       key: _formKey,
       child: AlertDialog(
+        insetPadding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        title: const Text("Add todo"),
+        title: const Text("Edit todo"),
         content: SizedBox(
           width: 400,
           height: 140,
@@ -36,8 +39,10 @@ class _ShowDialogState extends State<ShowDialog> {
                   }
                   return null;
                 },
-                onChanged: ((value) => title = value),
+                onChanged: ((titlevalue) => changeTitle = titlevalue),
+                initialValue: widget.initTitle,
               ),
+              // SizedBox(height:60)
               TextFormField(
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -45,7 +50,8 @@ class _ShowDialogState extends State<ShowDialog> {
                   }
                   return null;
                 },
-                onChanged: ((value) => Description = value),
+                onChanged: ((descvalue) => changeDescr = descvalue),
+                initialValue: widget.initDescription,
               )
             ],
           ),
@@ -53,18 +59,23 @@ class _ShowDialogState extends State<ShowDialog> {
         actions: [
           TextButton(
               onPressed: () {
+                
                 if (_formKey.currentState!.validate()) {
+                  print("change title $changeTitle");
+                print("change title $changeDescr");
                   setState(() {
-                    print("this is the title ${title}");
-                    FirebaseService().createToDo(title, Description);
+                    titlestart= widget.initTitle;
+                    FirebaseService().UpdateTodos(
+                        widget.initTitle, changeTitle, changeDescr);
                   });
                   Navigator.pop(context);
-                  var snackBar = SnackBar(content: Text('Todo is Added',style: TextStyle(color: Colors.green),));
+                  var snackBar = SnackBar(content: Text('Todo is Edited',style: TextStyle(color: Colors.green),));
                   ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 }
                 return null;
+                
               },
-              child: const Text("Add"))
+              child: const Text("Edit"))
         ],
       ),
     );

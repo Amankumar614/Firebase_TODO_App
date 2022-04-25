@@ -15,7 +15,7 @@ class MyHomePage extends StatefulWidget {
 // final String title = '';
 
 class _MyHomePageState extends State<MyHomePage> {
-  List todos = List.empty();
+  // List todos = List.empty();
   String title = '';
   String Description = '';
   
@@ -24,7 +24,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Todo App'),
-          actions: [IconButton(onPressed: (){GoogleSignInProvider().logOut();}, icon:Icon(Icons.access_time_rounded))],
+          actions: [IconButton(onPressed: (){GoogleSignInProvider().logOut();}, icon:Icon(Icons.logout),)],
         ),
         body: StreamBuilder<QuerySnapshot>(
           stream: FirebaseFirestore.instance.collection("MyTodos").snapshots(),
@@ -51,7 +51,8 @@ class _MyHomePageState extends State<MyHomePage> {
           onPressed: (() => showDialog(
               context: context,
               builder: (BuildContext context) {
-                return ShowDialog(title: title,Description: Description,);
+                print("dialog open with no data");
+                return ShowDialog();
               })
               ),
               child: const Icon(Icons.add,color: Colors.white,),

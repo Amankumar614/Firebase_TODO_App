@@ -23,7 +23,7 @@ class wrapper extends StatelessWidget {
         }
         else{
           return
-          login();
+          MyHomePage();
         }
       },
       ),
