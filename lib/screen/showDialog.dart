@@ -30,6 +30,7 @@ class _ShowDialogState extends State<ShowDialog> {
           child: Column(
             children: [
               TextFormField(
+                decoration: InputDecoration(hintText: "Title"),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter title';
@@ -39,6 +40,7 @@ class _ShowDialogState extends State<ShowDialog> {
                 onChanged: ((value) => title = value),
               ),
               TextFormField(
+                decoration: InputDecoration(hintText: "Description"),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter description';
@@ -52,6 +54,7 @@ class _ShowDialogState extends State<ShowDialog> {
         ),
         actions: [
           TextButton(
+            
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   setState(() {
