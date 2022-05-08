@@ -40,7 +40,7 @@ class FirebaseService {
   DocumentReference documentReference =
         FirebaseFirestore.instance.collection('MyTodos').doc(title);
          Map<String, dynamic> upadteTodo = {
-      "todoTitle": changeTitle,
+      // "todoTitle": changeTitle,
       "tododesc": changeDescr
     };
   // return await documentReference.set(upadteTodo).whenComplete(() => print("upadte complete"));

@@ -31,17 +31,28 @@ String changeDescr = widget.initDescription;
           width: 400,
           height: 140,
           child: Column(
-            children: [
-              TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter title';
-                  }
-                  return null;
-                },
-                onChanged: ((titlevalue) => changeTitle = titlevalue),
-                initialValue: widget.initTitle,
+            children: 
+            [
+              Row(
+                children: [
+                  Text("Title : ${widget.initTitle}",style: TextStyle(fontSize: 20)),
+                 
+                  
+                ],
               ),
+               SizedBox(height:20),
+              Row(children: [ Text("Description :",style: TextStyle(fontSize: 20),),],),
+              
+              // TextFormField(
+              //   validator: (value) {
+              //     if (value == null || value.isEmpty) {
+              //       return 'Please enter title';
+              //     }
+              //     return null;
+              //   },
+              //   onChanged: ((titlevalue) => changeTitle = titlevalue),
+              //   initialValue: widget.initTitle,
+              // ),
               // SizedBox(height:60)
               TextFormField(
                 validator: (value) {
